@@ -1,1 +1,1 @@
-# Gu-a-b-sica-de-virtualizaci-n-con-Proxmox-VE
+# guia-proxmox-basico
