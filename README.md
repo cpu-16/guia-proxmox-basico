@@ -25,7 +25,7 @@ Antes de crear una VM o un contenedor LXC, Proxmox necesita tener:
 - **Imágenes ISO** de sistemas operativos (para las VMs).
 - **Plantillas de contenedor (CT Templates)** para los LXC.
 
-### Paso 2: Cargar imágenes ISO para las VM
+### Paso 2.1: Cargar imágenes ISO para las VM
 
 En el panel izquierdo selecciona el almacenamiento del nodo, por ejemplo:
 
@@ -45,7 +45,7 @@ Luego, en la parte central, abre la pestaña **ISO Images**. Arriba verás dos b
 
 Todas las ISOs que cargues aquí aparecerán en la lista y luego podrás seleccionarlas al usar el asistente **Create VM**.
 
-### Paso 3: Descargar o subir CT Templates (contenedores LXC)
+### Paso 2.2: Descargar o subir CT Templates (contenedores LXC)
 
 En el mismo almacenamiento `local (proxmox-test-1)`, selecciona ahora la pestaña **CT Templates**. Aquí gestionas las **plantillas que se usan para crear contenedores LXC**.
 
@@ -65,3 +65,27 @@ En la parte superior verás:
 
 Una vez que tengas al menos una plantilla descargada, podrás seleccionarla cuando uses el asistente **Create CT** para crear contenedores LXC ligeros.
 
+## 4. Crear máquinas virtuales (VM) y contenedores (CT) desde la interfaz
+
+Proxmox VE permite dos tipos principales de entornos en el nodo:
+
+- **Máquinas virtuales (VM)**: sistemas completos (Linux, Windows, etc.) con su propio hardware virtual (CPU, RAM, disco).
+- **Contenedores LXC (CT)**: sistemas Linux ligeros que comparten el kernel del host y consumen menos recursos.
+
+> 💡 Antes de empezar, selecciona tu nodo (por ejemplo, `proxmox-test-1`) en el panel izquierdo.
+
+![Botones Create VM y Create CT](images/paso2.png)
+
+Con el nodo seleccionado, en la parte superior derecha verás dos botones:
+
+- **Create VM**  
+  Abre el asistente para crear una VM a partir de una imagen ISO. En los siguientes pasos elegirás ISO, tamaño de disco, CPU, RAM y red.
+
+- **Create CT**  
+  Abre el asistente para crear un contenedor LXC usando una plantilla de CT (de la sección **CT Templates**). También configurarás nombre, disco, CPU, RAM y red.
+
+En las siguientes secciones de la guía se explicará paso a paso cómo:
+
+1. Crear la **primera VM** con **Create VM**.  
+2. Crear el **primer contenedor LXC** con **Create CT**.  
+3. Más adelante, ver una alternativa usando **scripts desde la pestaña Shell** del nodo.
