@@ -171,3 +171,60 @@ Con esto ya tienes una **VM básica creada y lista para instalar el sistema oper
 
 ![Finalización de Kali linux en Proxmox](images/paso6.png)
 
+## 6. Crear un contenedor LXC con scripts de la comunidad
+
+Además del asistente gráfico, Proxmox permite crear contenedores LXC usando **scripts automatizados**.  
+En este ejemplo usaremos el proyecto de la comunidad:
+
+👉 https://community-scripts.github.io/ProxmoxVE/
+
+Esta página ofrece scripts listos para crear VMs y LXC (Debian, Ubuntu, Docker, Nextcloud, etc.) con configuraciones recomendadas.
+
+> ⚠️ Nota de seguridad: estos scripts se ejecutan como `root` en el nodo Proxmox. Úsalos solo si confías en la fuente y entiendes lo que hacen.
+
+### 6.1. Elegir el script de Debian LXC en la web
+
+1. Abre la página de **Proxmox VE Helper-Scripts**.
+2. En la columna izquierda, ve a **Operating Systems → Debian (LXC)**.
+3. En la parte central verás la descripción y, en la sección **How to install**, el comando `bash -c "$(curl …debian.sh)"`.
+
+![Vista del script Debian LXC en Proxmox VE Helper-Scripts](images/paso7.png)
+
+Copia el comando completo que aparece en el recuadro.
+
+### 6.2. Ejecutar el script en la Shell de Proxmox
+
+1. En la interfaz web de Proxmox, selecciona tu nodo (por ejemplo `ciber`).
+2. En el menú de la izquierda, haz clic en **Shell**.
+3. Pega el comando en la consola y pulsa **Enter**, por ejemplo:
+
+   ```bash
+   bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/debian.sh)"
+
+![Comando en la shell del nodo](images/paso8.png)
+
+El script descargará y ejecutará el instalador de Debian LXC.
+
+### 6.3. Usar la opción de configuración por defecto
+
+Al iniciar, verás un menú tipo texto llamado **Proxmox VE Helper Scripts**:
+
+- Elige la opción **1) Default Settings** para crear el contenedor con valores recomendados  
+  (ID, disco, CPU, RAM, etc.).
+- Confirma con `<Ok>`.
+
+El script mostrará un resumen de la configuración (ID del contenedor, sistema operativo **Debian 13**, tipo **Unprivileged**, tamaño de disco, RAM, etc.) y empezará a crear el LXC.
+
+![Finalización del script correcto](images/paso10.png)
+
+Cuando termine:
+
+- Aparecerá un nuevo contenedor **Debian** en el árbol de la izquierda, bajo tu nodo Proxmox.
+- Podrás iniciarlo, entrar por consola o integrarlo después con **Guacamole** para acceder vía web.
+
+![Debian corriendo](images/paso11.png)
+
+Con esto ya tienes **dos formas de crear entornos** en tu laboratorio:
+
+1. Asistente gráfico (**Create VM / Create CT**) para configuraciones manuales.  
+2. Scripts de la comunidad (**Proxmox VE Helper-Scripts**) para desplegar contenedores rápido desde la Shell.
